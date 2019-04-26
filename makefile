@@ -10,13 +10,14 @@ else
 	CFLAGS += $(OPTFLAGS)
 endif
 
+all: $(binaries)
+
 processdemo: process.c
 
 queuedemo: queue.c process.c
 
 ctx_demo: queue.c process.c processmodel.c
 
-all: $(binaries)
 
 clean:
 	$(RM)	*~ $(binaries) *.o

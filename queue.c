@@ -2,21 +2,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void error() {
-
-
-}
 
 // add process to queue (last element)
 void q_add(queue *q, process *proc) {
-    printf("...adding Process to Queue\n");
-    q_node *newNode;
-    newNode = (q_node *)malloc(sizeof(q_node));
-    if(!proc) error(); //return -1;
+    if(!proc) return;
+    if(!q)    return;
+ 
+    q_node *newNode = (q_node *)malloc(sizeof(q_node));
     newNode->p = proc;	
     newNode->next = NULL;
 
-    if(!q) error(); //return -1;
 
     if(q->start == NULL) {
         q->start = newNode;
@@ -30,10 +25,12 @@ void q_add(queue *q, process *proc) {
 void q_print(queue *q) {
     printf("...printing Queue\n");
     q_node *tmp = q->start;
-    int i = 0;
-    if(!tmp)
-        printf("ELEMENT QUEUE IS NULL\n");
+    if(!tmp) {
+        printf("QUEUE is empty\n");
+        return;
+    }	
 
+    int i = 0;
     while(tmp) {
         i++;
         if(tmp->p) {
@@ -42,13 +39,14 @@ void q_print(queue *q) {
         }
         tmp = tmp->next;
     }
-    printf("...end of QUEUE\n\n");
+    printf("__end of QUEUE\n\n");
 }
 
 
 process *q_remove(queue *q) {
+#ifdef DEBUG
     printf("...remove process from Queue\n");
-
+#endif
     process *pPtr = q->start->p;
 
     q_node *qPtrTmp = q->start;
@@ -56,7 +54,6 @@ process *q_remove(queue *q) {
     q->start = q->start->next;
 
     free(qPtrTmp);
-
     return pPtr;
 
 

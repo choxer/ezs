@@ -5,8 +5,7 @@
 
 void p_switch_state(process *p) {
 
-    printf("...switching state of process (ID): %d\n", p->p_id);
-
+	if(!p) fprintf(stderr, "ERR: Process is NULL\n");
     if (p->p_state == READY)
         p->p_state = RUNNING;
     else if (p->p_state == RUNNING)
