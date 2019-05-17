@@ -1,8 +1,8 @@
 WARNFLAGS = -W -Wall -Werror
-OPTFLAGS = -O3
+OPTFLAGS = -O3 -lreadline
 DEBUGFLAGS = -ggdb3 -DDEBUG
 CFLAGS += $(WARNFLAGS)
-binaries = processdemo queuedemo ctx_demo	
+binaries = environ childprocess zombie
 
 ifdef DEBUG
 	CFLAGS += $(DEBUGFLAGS)
@@ -11,13 +11,6 @@ else
 endif
 
 all: $(binaries)
-
-processdemo: process.c
-
-queuedemo: queue.c process.c
-
-ctx_demo: queue.c process.c processmodel.c
-
 
 clean:
 	$(RM)	*~ $(binaries) *.o
